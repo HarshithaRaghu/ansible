@@ -5,7 +5,7 @@
   vars_files:
     - demo-vars.yaml 
   vars_prompt:
-    - name: URL 
+    - name: URL
       prompt: Enter URL Value 
       private: false
     
