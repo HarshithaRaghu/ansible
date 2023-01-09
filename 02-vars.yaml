@@ -20,7 +20,7 @@
       vars:                               # Declaring the variable at task level ( Local variable )
         URL: task.google.com 
 
-    - name: Printing CLI_URL 
+    - name: Printing CLI_URL  
       ansible.builtin.debug:
         msg: value of CLI_URL is {{CLI_URL}}
 
