@@ -7,7 +7,8 @@
 - name: Cleanup of Old Content 
   ansible.builtin.file:
     path: /home/{{APPUSER}}/{{COMPONENT}}/ 
-    state: absent  
+    state: absent
+    ignore_errors: yes  
 
 - name: Copy files to the roboshop home directory
   ansible.builtin.copy:
@@ -16,3 +17,4 @@
     remote_src: yes
     owner: "{{APPUSER}}"
     group: "{{APPUSER}}"
+    ignore_errors: yes
