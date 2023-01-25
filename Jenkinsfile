@@ -3,7 +3,6 @@ pipeline {
     environment {                                       // Declaring at pipeline will allow all the stages to access this variable
         SSH_CRED = credentials('SSH_CRED') 
     }
-    
     stages {
         stage('Lint Checks') {
             when { branch pattern: "feature-.*", comparator: "REGEXP" }
@@ -14,15 +13,14 @@ pipeline {
             }
         }  
 
-
         stage('Performing a Dry-Run') {                 // Just for demo purpose we have hardcoded env and component; That can still be parameterised.
-            when { branch pattern: "feature-.*", comparator: "REGEXP" }
-          steps {
+            when { branch pattern: "PR-.*", comparator: "REGEXP"}
+            steps {
                 sh "env"
                 sh "Runs only aginst a PR"
                 sh "ansible-playbook robot-dryrun.yml -e COMPONENT=mongodb -e ansible_user=${SSH_CRED_USR} -e ansible_password=${SSH_CRED_PSW} -e ENV=dev"
             }
-        } 
+        }
 
         stage('Runs against Main') {
             when { branch 'main' }
@@ -30,8 +28,8 @@ pipeline {
                 sh "env"
                 sh "echo MAIN Branch"
             }
-        }     
+        }
     }
-}    
+}
 
- // Pushing changes to feature branch       
+// Pushing changes to feature branch
