@@ -3,15 +3,7 @@ pipeline {
     environment {                                       // Declaring at pipeline will allow all the stages to access this variable
         SSH_CRED = credentials('SSH_CRED') 
     }
-    stages {
-        stage('Lint Checks') {
-            when { branch pattern: "feature-.*", comparator: "REGEXP" }
-            steps {
-                sh "env"
-                sh "echo runs only on feature branch"
-                sh "echo lint cheks are completed."
-            }
-        }  
+    
 
         stage('Performing a Dry-Run') {                 // Just for demo purpose we have hardcoded env and component; That can still be parameterised.
             when { branch pattern: "PR-.*", comparator: "REGEXP"}
@@ -22,14 +14,4 @@ pipeline {
             }
         }
 
-        stage('Runs against Main') {
-            when { branch 'main' }
-            steps {
-                sh "env"
-                sh "echo MAIN Branch"
-            }
-        }
-    }
-}
-
-// Pushing changes to feature branch
+        
