@@ -28,7 +28,18 @@ pipeline {
                 sh "env"
                 sh "echo MAIN Branch"
             }
+    
         }
+    
+        stage('Runs against Tag') {
+            when { expression { env.TAG_NAME != null } }                       // TAG_NAME is an environment
+            steps {
+                sh "env"
+                sh "echo $TAG_NAME"
+            }
+        }
+    
+    
     }
 }
 
