@@ -15,12 +15,12 @@
     dest: /usr/share/nginx/html/ 
     remote_src: yes 
 
-
-- name: Coping the Frontend Content to Nginx Path 
-  ansible.builtin.copy:
-    src: /tmp/frontend-main/static/
-    dest: /usr/share/nginx/html/ 
-    remote_src: yes                        # Since the source is on a remote machine, ensure you mention remote_src as yes 
+# Uncomment ths only if you use GitHub to download the code directly.
+# - name: Coping the Frontend Content to Nginx Path 
+#   ansible.builtin.copy:
+#     src: /tmp/frontend-main/static/
+#     dest: /usr/share/nginx/html/ 
+#     remote_src: yes                        # Since the source is on a remote machine, ensure you mention remote_src as yes 
 
 - name: Coping Nginx Config 
   ansible.builtin.template:                    # Copies the file from the files directory
