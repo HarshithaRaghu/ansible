@@ -9,6 +9,13 @@
     path: /usr/share/nginx/html/
     state: absent 
 
+- name: Creating App Directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html/
+    state: directory
+    mode: '0755'
+  ignore_errors: yes    
+
 - name: Download and extracting the Component 
   ansible.builtin.unarchive:
     src: http://172.31.7.27:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
