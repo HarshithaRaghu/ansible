@@ -11,15 +11,23 @@
     name: common
     tasks_from: create-user
 
+- name: Download pem file
+  ansible.builtin.get_url:
+    url: https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
+    dest: /home/roboshop/
+    mode: '0440'
+    owner: roboshop 
+    group: roboshop
+
 - name: Download and extracting the Component 
   include_role:
     name: common
     tasks_from: download-nexus
 
 # Uncomment it only when you directly download it from the nexus.
-- name: Install node.js packages
-  community.general.npm:
-    path: /home/{{APPUSER}}/{{COMPONENT}}/
+# - name: Install node.js packages
+#   community.general.npm:
+#     path: /home/{{APPUSER}}/{{COMPONENT}}/
 
 - name: Configuring Service
   include_role:
@@ -27,4 +35,4 @@
     tasks_from: config-svc
 
 - name: Set-Hostname
-  ansible.builtin.shell: set-hostname {{COMPONENT}}
+  ansible.builtin.shell: set-hostname {{COMPONENT}} 
